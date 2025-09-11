@@ -14,7 +14,7 @@ services:
   node:
     image: node:22
     restart: always
-    command: sh -c "cd app && yarn && npx prisma migrate deploy && yarn dev"
+    command: sh -c "cd app && yarn && npx prisma generate && npx prisma migrate deploy && yarn dev"
     volumes:
       - ./:/app
     depends_on:

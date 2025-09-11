@@ -6,8 +6,6 @@ export interface IElectricityPrice {
   endDate: string;
 }
 
-// **** User **** //
-
 class ElectricityPrice implements IElectricityPrice {
   public price: number;
   public startDate: string;

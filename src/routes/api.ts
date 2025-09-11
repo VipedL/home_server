@@ -89,6 +89,11 @@ socketRouter.get(
   SocketRoutes.getSockets,
 )
 
+socketRouter.post(
+  Paths.Sockets.Add,
+  SocketRoutes.addSocket,
+)
+
 console.log(Paths.Calendar.GetAllEvents)
 
 // Add UserRouter

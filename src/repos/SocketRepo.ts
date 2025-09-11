@@ -1,16 +1,25 @@
-import { IUser } from "@src/models/User";
-import { getRandomInt } from "@src/util/misc";
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "../../generated/prisma/client";
+import Socket, { ISocket } from "@src/models/Socket";
 
-
+const { PrismaClient } = require("../../generated/prisma");
 // **** Functions **** //
 const prisma = new PrismaClient();
 /**
  * Get one user.
  */
-async function getAll(email: string): Promise<IUser | null> {
+async function getAll(): Promise<Array<ISocket>> {
   const sockets = await prisma.socket.findMany();
   return sockets;
+}
+
+async function addOne(socket: Partial<Socket>): Promise<void> {
+  await prisma.socket.create({
+    data: {
+      type: socket.type!,
+      name: socket.name!,
+      ipAddress: socket.ipAddress!,
+    },
+  });
 }
 
 // /**
@@ -74,10 +83,10 @@ async function getAll(email: string): Promise<IUser | null> {
 // **** Export default **** //
 
 export default {
-//   getOne,
-//   persists,
+  //   getOne,
+  //   persists,
   getAll,
-//   add,
-//   update,
-//   delete: delete_,
+  addOne,
+  //   update,
+  //   delete: delete_,
 } as const;

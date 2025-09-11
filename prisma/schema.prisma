@@ -7,6 +7,7 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -19,4 +20,13 @@ model ElectricityPrice {
   price Float
   startDate String
   endDate String
+}
+
+model Socket {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  type String
+  name String
+  ipAddress String
 }

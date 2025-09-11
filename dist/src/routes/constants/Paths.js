@@ -1,10 +1,8 @@
+"use strict";
 /**
  * Express router paths go here.
  */
-
-import ElectricityPrice from '@src/models/ElectricityPrice';
-import {Immutable} from '@src/other/types';
-
+Object.defineProperty(exports, "__esModule", { value: true });
 const Paths = {
     Base: '/api',
     Auth: {
@@ -33,8 +31,4 @@ const Paths = {
         Add: '/add',
     }
 };
-
-// **** Export **** //
-
-export type TPaths = Immutable<typeof Paths>;
-export default Paths as TPaths;
+exports.default = Paths;

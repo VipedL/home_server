@@ -1,4 +1,6 @@
 import axios, { AxiosResponse } from "axios";
+import SocketRepo from "@src/repos/SocketRepo";
+import Socket, { ISocket } from "@src/models/Socket";
 
 // **** Variables **** //
 
@@ -15,11 +17,17 @@ export const Errors = {
 /**
  * Get electricity data.
  */
-async function getSockets(): Promise<AxiosResponse<any>> {
-  return axios.get("https://api.porssisahko.net/v1/latest-prices.json");
+async function getSockets(): Promise<ISocket[]> {
+  return await SocketRepo.getAll();
 }
+
+const addSocket = async (socket: Socket): Promise<any> => {
+  await SocketRepo.addOne(socket);
+  return;
+};
 
 // **** Export default **** //
 export default {
   getSockets,
+  addSocket,
 } as const;

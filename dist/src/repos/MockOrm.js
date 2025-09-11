@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsonfile_1 = __importDefault(require("jsonfile"));
+// **** Variables **** //
+const DB_FILE_NAME = 'database.json';
+// **** Functions **** //
+/**
+ * Fetch the json from the file.
+ */
+function openDb() {
+    return jsonfile_1.default.readFile(__dirname + '/' + DB_FILE_NAME);
+}
+/**
+ * Update the file.
+ */
+function saveDb(db) {
+    return jsonfile_1.default.writeFile((__dirname + '/' + DB_FILE_NAME), db);
+}
+// **** Export default **** //
+exports.default = {
+    openDb,
+    saveDb,
+};
