@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+    ports:
+      - '3306:3306'
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8181:8080
+  node:
+    image: node:22
+    restart: always
+    command: sh -c "cd app && yarn && npx prisma migrate deploy && yarn dev"
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.update-prices.schedule: "@every 1h"
+      ofelia.job-exec.update-prices.command: "sh -c 'npx node app/scripts/fetchHourlyElectricityPrices.ts'"
+  ofelia:
+    image: mcuadros/ofelia:latest
+    container_name: ofelia
+    restart: always
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./ofelia/etc/ofelia:/etc/ofelia
+    depends_on:
+      - node
