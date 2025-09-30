@@ -25,7 +25,7 @@ const Paths = {
     },
     Electricity: {
         Base: '/electricity',
-        GetData: '/data',
+        GetAll: '/',
     },
     Sockets: {
         Base: '/sockets',

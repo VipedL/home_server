@@ -1,11 +1,11 @@
-import axios, {AxiosResponse} from 'axios';
-
+import { IElectricityPrice } from "@src/models/ElectricityPrice";
+import ElectricityPriceRepo from "@src/repos/ElectricityPriceRepo";
 
 // **** Variables **** //
 
 // Errors
 export const Errors = {
-  Unauth: 'Unauthorized',
+  Unauth: "Unauthorized",
   EmailNotFound(email: string) {
     return `User with email "${email}" not found`;
   },
@@ -21,17 +21,21 @@ type ElectricityApiResponse = {
   prices: ElectricityData[];
 };
 
-
 // **** Functions **** //
 
 /**
  * Get electricity data.
  */
-async function getElectricityData(): Promise<AxiosResponse<ElectricityApiResponse>> {
-    return axios.get('https://api.porssisahko.net/v1/latest-prices.json')   
+async function getAll(): Promise<Array<IElectricityPrice>> {
+  try {
+    return await ElectricityPriceRepo.getAll();
+  } catch (error) {
+    console.error("Error fetching electricity data:", error);
+    throw error;
+  }
 }
 
 // **** Export default **** //
 export default {
-  getElectricityData,
+  getAll,
 } as const;

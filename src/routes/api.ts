@@ -80,8 +80,8 @@ calendarRouter.get(
 )
 
 electricityRouter.get(
-  Paths.Electricity.GetData,
-  ElectricityRoutes.getElectricityData,
+  Paths.Electricity.GetAll,
+  ElectricityRoutes.getAll,
 )
 
 socketRouter.get(

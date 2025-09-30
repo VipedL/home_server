@@ -8,12 +8,12 @@ import ElectricityService from "@src/services/ElectricityService";
 /**
  * Get all users.
  */
-async function getElectricityData(_: IReq, res: IRes) {
-  const data = (await ElectricityService.getElectricityData()).data;
+async function getAll(_: IReq, res: IRes) {
+  const data = (await ElectricityService.getAll());
   return res.status(HttpStatusCodes.OK).json(data);
 }
 
 // **** Export default **** //
 export default {
-  getElectricityData,
+  getAll,
 } as const;
