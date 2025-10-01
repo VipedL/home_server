@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   axios
-    .get("https://api.porssisahko.net/v1/latest-prices.json")
+    .get("https://api.porssisahko.net/v2/latest-prices.json")
     .then(async (response) => {
       const prices = response.data.prices;
       
